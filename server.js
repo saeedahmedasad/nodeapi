@@ -7,10 +7,6 @@ connectDB();
 // Listening on the Post
 app.listen(process.env.PORT, () => {
   console.log(
-    "Listening on Port " +
-      process.env.PORT +
-      " in " +
-      process.env.NODE_ENV +
-      " mode"
+    `Server is running on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode`
   );
 });

@@ -1,10 +1,18 @@
 import { User } from "../models/users.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { sendCookie } from "../utils/features.js";
 import { ErrorHandler } from "./task.js";
 
-export const getAllUsers = async (req, res) => {};
+export const getAllUsers = async (req, res) => {
+  const users = await User.find({});
+  if (!users) {
+    return res.status(404).json({
+      success: false,
+      message: "No users found",
+    });
+  }
+  res.json(users);
+};
 
 export const login = async (req, res, next) => {
   try {
@@ -47,10 +55,11 @@ export const register = async (req, res, next) => {
 };
 export const logout = (req, res) => {
   res
+    .status(200)
     .cookie("token", null, {
       expires: new Date(Date.now()),
-      sameSite: "none",
-      secure: true,
+      sameSite: process.env.NODEV_ENV ? "lax" : "none",
+      secure: process.env.NODEV_ENV ? false : true,
     })
     .json({
       success: true,

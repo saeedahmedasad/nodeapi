@@ -11,7 +11,7 @@ export const addNewTask = async (req, res, next) => {
   try {
     const { title, description } = req.body;
     await Task.create({ title, description, user: req.user });
-    res.json({
+    res.status(201).json({
       success: true,
       message: "Task Added Successfully",
     });
@@ -27,7 +27,7 @@ export const getAllTasks = async (req, res, next) => {
       next(new ErrorHandler("No Tasks Found", 404));
     }
     console.log(tasks);
-    res.json({
+    res.status(200).json({
       success: true,
       tasks,
     });
@@ -50,7 +50,7 @@ export const updateTask = async (req, res, next) => {
       { isCompleted },
       { new: true }
     );
-    res.json({
+    res.status(200).json({
       success: true,
       message: "Task Updated Successfully",
     });
@@ -69,7 +69,7 @@ export const deleteTask = async (req, res, next) => {
     }
 
     await Task.findByIdAndDelete(id);
-    res.json({
+    res.status(200).json({
       success: true,
       message: "Task Deleted Successfully",
     });
