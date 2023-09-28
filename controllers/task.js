@@ -9,8 +9,14 @@ export class ErrorHandler extends Error {
 
 export const addNewTask = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
-    await Task.create({ title, description, user: req.user });
+    const { title, description, dueDate } = req.body;
+    console.log(dueDate);
+    await Task.create({
+      title,
+      description,
+      dueDate,
+      user: req.user,
+    });
     res.status(201).json({
       success: true,
       message: "Task Added Successfully",

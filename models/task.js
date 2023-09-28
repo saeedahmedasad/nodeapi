@@ -11,6 +11,8 @@ const schema = new mongoose.Schema({
   },
   dueDate: {
     type: Date,
+    required: true,
+    default: Date.now,
   },
   isCompleted: {
     type: Boolean,
