@@ -9,6 +9,9 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dueDate: {
+    type: Date,
+  },
   isCompleted: {
     type: Boolean,
     default: false,
